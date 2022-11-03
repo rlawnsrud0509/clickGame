@@ -1,6 +1,5 @@
 import * as S from "./StartPageStyle";
 import { Link } from "react-router-dom";
-import Start from "../../Images/Start.jpg";
 
 function StartPage() {
   const LinkStyle = {
