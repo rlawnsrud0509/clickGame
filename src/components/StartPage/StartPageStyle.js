@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import mainJPG from "../../Images/mainJPG.jpg";
-import Start from "../../Images/Start.jpg";
+import mainJPG from "../../Images/baseImg/mainJPG.jpg";
+import Start from "../../Images/baseImg/Start.jpg";
 
 export const container = styled.div`
   display: flex;
@@ -8,6 +8,7 @@ export const container = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
+  background-color: black;
 `;
 
 export const main = styled.div`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Upgrade from "../../Images/Upgrade.jpg";
+import Upgrade from "../../Images/baseImg/Upgrade.jpg";
 
 export const container = styled.div`
   display: flex;
@@ -7,6 +7,8 @@ export const container = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
+  background-color: black;
+  z-index: -4;
 `;
 
 export const main = styled.div`
@@ -17,6 +19,8 @@ export const main = styled.div`
   background-size: cover;
   border: 5px solid black;
   border-radius: 0.5rem;
+  background-color: white;
+  z-index: 0;
 `;
 
 export const storeButton = styled.button`
@@ -53,22 +57,50 @@ export const player = styled.div`
   left: 10%;
   background-image: url(${(props) => props.img});
   background-size: cover;
+  z-index: -1;
 `;
 
 export const attLine = styled.div`
   position: absolute;
-  width: 60%;
+  width: 53%;
   height: 1%;
-  top: 62%;
+  top: 60%;
   left: 15%;
-  background-color: gray;
+  background-color: white;
+  z-index: -2;
 `;
 
 export const AttObject = styled.div`
+  top: -500%;
+  left: 20%;
   position: absolute;
   display: flex;
-  border: 3px solid black;
   width: 50px;
   height: 50px;
-  opacity: 0.1;
+  opacity: 1;
+  transition-duration: 0.05s;
+
+  background: url(${(props) => props.img});
+  background-size: cover;
+  border: 3px solid black;
+`;
+
+export const moneyDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  width: 30%;
+  height: 20%;
+  margin: 2rem 0rem 0rem 2rem;
+  font-size: 60px;
+  font-weight: 600;
+`;
+
+export const moneyImg = styled.div`
+  width: 45%;
+  height: 100%;
+
+  background: url(${(props) => props.img});
+  background-size: cover;
 `;
