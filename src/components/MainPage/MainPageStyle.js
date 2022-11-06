@@ -25,12 +25,13 @@ export const main = styled.div`
 
 export const storeButton = styled.button`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 30%;
+  height: 20%;
   background: url(${Upgrade});
   background-size: cover;
   border: 5px solid black;
   border-radius: 2rem;
+  margin: 2rem 0rem 0rem 2rem;
   opacity: 0.4;
 
   transition-timing-function: ease-out;
@@ -81,6 +82,8 @@ export const AttObject = styled.img`
   transition-duration: 0.05s;
 
   background-size: cover;
+  z-index: 2;
+  background: none;
 `;
 
 export const moneyDiv = styled.div`
@@ -105,11 +108,11 @@ export const moneyImg = styled.div`
 
 export const tree = styled.img`
   position: absolute;
-  top: -2000%;
-  left: 100%;
+  top: -2500%;
+  left: 120%;
   display: flex;
   width: 30%;
-  height: 250px;
+  height: 300px;
 
   background-size: cover;
 `;

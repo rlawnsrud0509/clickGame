@@ -1,5 +1,4 @@
 import * as M from "./MainPageStyle";
-import { Link } from "react-router-dom";
 import Charge1 from "../../Images/baseImg/Charge1.jpg";
 import Charge2 from "../../Images/baseImg/Charge2.jpg";
 import Money from "../../Images/baseImg/Money.jpg";
@@ -12,6 +11,7 @@ function MainPage() {
   let [money, setMoney] = useState(0);
   let [attLevel, setAttLevel] = useState(1);
   let [treeLevel, setTreeLevel] = useState(1);
+  let [displayStore, setDisplayStore] = useState();
   let attlocation = useRef();
   let tRandom = -500;
 
@@ -103,16 +103,13 @@ function MainPage() {
   return (
     <M.container>
       <M.main>
-        <Link to="/Store" style={LinkStyle}>
-          <M.storeButton></M.storeButton>
-        </Link>
+        <M.storeButton>{displayStore}</M.storeButton>{" "}
         <M.moneyDiv>
           <M.moneyImg img={Money}></M.moneyImg>: {money}
         </M.moneyDiv>
         <M.player img={playerState}></M.player>
         <M.attLine>
           {AttObject}
-
           <M.tree src={treeImgLink}></M.tree>
         </M.attLine>
       </M.main>
