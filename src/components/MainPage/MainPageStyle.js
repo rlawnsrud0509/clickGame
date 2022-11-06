@@ -70,7 +70,7 @@ export const attLine = styled.div`
   z-index: -2;
 `;
 
-export const AttObject = styled.div`
+export const AttObject = styled.img`
   top: -500%;
   left: 20%;
   position: absolute;
@@ -80,9 +80,7 @@ export const AttObject = styled.div`
   opacity: 1;
   transition-duration: 0.05s;
 
-  background: url(${(props) => props.img});
   background-size: cover;
-  border: 3px solid black;
 `;
 
 export const moneyDiv = styled.div`
@@ -98,9 +96,20 @@ export const moneyDiv = styled.div`
 `;
 
 export const moneyImg = styled.div`
-  width: 45%;
-  height: 100%;
+  width: 40%;
+  height: 110%;
 
   background: url(${(props) => props.img});
+  background-size: cover;
+`;
+
+export const tree = styled.img`
+  position: absolute;
+  top: -2000%;
+  left: 100%;
+  display: flex;
+  width: 30%;
+  height: 250px;
+
   background-size: cover;
 `;
