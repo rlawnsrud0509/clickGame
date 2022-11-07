@@ -92,14 +92,6 @@ function MainPage() {
 
   document.onclick = click;
 
-  const LinkStyle = {
-    display: "flex",
-    width: "30%",
-    height: "25%",
-    borderRadius: "2rem",
-    margin: "2rem 0rem 0rem 2rem",
-  };
-
   return (
     <M.container>
       <M.main>
