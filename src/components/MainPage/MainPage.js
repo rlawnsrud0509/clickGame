@@ -105,6 +105,7 @@ function MainPage() {
           <M.tree src={treeImgLink}></M.tree>
         </M.attLine>
       </M.main>
+      <M.container></M.container>
     </M.container>
   );
 }
