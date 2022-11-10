@@ -12,8 +12,9 @@ function MainPage() {
   let [attLevel, setAttLevel] = useState(1);
   let [treeLevel, setTreeLevel] = useState(1);
   let [displayStore, setDisplayStore] = useState();
+  let [toggleStore, setToggleStore] = useState(-1);
   let attlocation = useRef();
-  let tRandom = -500;
+  let tRandom = -501;
 
   let [attImgLink, setAttImgLink] = useState("");
   let [treeImgLink, setTreeImgLink] = useState("");
@@ -90,12 +91,26 @@ function MainPage() {
     }
   };
 
+  function showStore() {
+    setToggleStore(toggleStore * -1);
+
+    if (toggleStore === 1) {
+      setDisplayStore(
+        <M.storeContainer>
+          <M.storeDiv>
+            <M.upgradeButton></M.upgradeButton>
+          </M.storeDiv>
+        </M.storeContainer>
+      );
+    }
+  }
+
   document.onclick = click;
 
   return (
     <M.container>
       <M.main>
-        <M.storeButton>{displayStore}</M.storeButton>{" "}
+        <M.storeButton onClick={showStore}>{displayStore}</M.storeButton>
         <M.moneyDiv>
           <M.moneyImg img={Money}></M.moneyImg>: {money}
         </M.moneyDiv>
@@ -105,7 +120,6 @@ function MainPage() {
           <M.tree src={treeImgLink}></M.tree>
         </M.attLine>
       </M.main>
-      <M.container></M.container>
     </M.container>
   );
 }

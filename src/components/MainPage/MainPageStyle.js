@@ -116,3 +116,37 @@ export const tree = styled.img`
 
   background-size: cover;
 `;
+
+export const storeContainer = styled.div`
+  display: flex;
+  position: absolute;
+  top: -0.5%;
+  left: 0%;
+  z-index: 5;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 101%;
+  opacity: 1;
+
+  background-color: gray;
+  border-radius: 0.5rem;
+`;
+
+export const storeDiv = styled.div`
+  display: flex;
+  width: 80%;
+  height: 70%;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  justify-content: space-around;
+  background-color: black;
+`;
+
+export const upgradeButton = styled.div`
+  display: flex;
+  width: 30%;
+  height: 80%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  background-color: white;
+`;
