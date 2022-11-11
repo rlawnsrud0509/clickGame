@@ -80,6 +80,7 @@ export const AttObject = styled.img`
   height: 50px;
   opacity: 1;
   transition-duration: 0.05s;
+  transform: rotate(${Math.random(0 - 360) + 360});
 
   background-size: cover;
   z-index: 2;
@@ -127,26 +128,64 @@ export const storeContainer = styled.div`
   width: 100%;
   height: 101%;
   opacity: 1;
+  flex-direction: column;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
 
-  background-color: gray;
+  background-color: white;
   border-radius: 0.5rem;
 `;
 
 export const storeDiv = styled.div`
   display: flex;
-  width: 80%;
+  width: 900px;
   height: 70%;
-  flex-wrap: wrap;
-  overflow-x: hidden;
-  justify-content: space-around;
-  background-color: black;
+  align-items: center;
+  margin-top: 5%;
 `;
 
-export const upgradeButton = styled.div`
+export const upgradeDiv = styled.div`
   display: flex;
-  width: 30%;
+  flex-direction: column;
+  width: 200px;
   height: 80%;
   margin-top: 1%;
   margin-bottom: 1%;
+  margin-left: 6.3%;
+  font-size: 30px;
   background-color: white;
+  text-align: center;
+  padding: 0.8rem;
+`;
+
+export const upgradeButton = styled.button`
+  width: 60%;
+  height: 15%;
+  border: 3px solid black;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 20px;
+  margin-left: 2.25rem;
+  margin-bottom: 0;
+  background-color: white;
+
+  :hover {
+    cursor: pointer;
+  }
+
+  :active {
+    transition-duration: 0.05s;
+    background-image: none;
+    border-color: white;
+    background-color: black;
+  }
+`;
+
+export const backButton = styled.div`
+  width: 30%;
+  height: 20%;
+
+  border: 5px solid black;
+  border-radius: 1.5rem;
 `;

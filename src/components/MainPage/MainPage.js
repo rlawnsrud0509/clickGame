@@ -2,6 +2,9 @@ import * as M from "./MainPageStyle";
 import Charge1 from "../../Images/baseImg/Charge1.jpg";
 import Charge2 from "../../Images/baseImg/Charge2.jpg";
 import Money from "../../Images/baseImg/Money.jpg";
+import jpUpgrade from "../../Images/baseImg/jpUpgrade.jpg";
+import treeUpgrade from "../../Images/baseImg/treeUpgrade.jpg";
+import critUpgrade from "../../Images/baseImg/criticalPlus.jpg";
 import { useState, useRef } from "react";
 
 function MainPage() {
@@ -10,14 +13,20 @@ function MainPage() {
   let [AttObject, setAttObject] = useState([]);
   let [money, setMoney] = useState(0);
   let [attLevel, setAttLevel] = useState(1);
+  let [CriticalRate, setCriticalRate] = useState(3);
   let [treeLevel, setTreeLevel] = useState(1);
+  let [attMoney, setAttMoney] = useState(500);
+  let [CriticalMoney, setCriticalMoney] = useState(1000);
+  let [treeMoney, setTreeMoney] = useState(10000);
   let [displayStore, setDisplayStore] = useState();
   let [toggleStore, setToggleStore] = useState(-1);
   let attlocation = useRef();
-  let tRandom = -501;
+  let tRandom = -500;
 
   let [attImgLink, setAttImgLink] = useState("");
   let [treeImgLink, setTreeImgLink] = useState("");
+
+  const setCrit = () => {};
 
   const getRandom = (min, max) => Math.random() * (max - min) + min;
 
@@ -25,10 +34,27 @@ function MainPage() {
     setAttImgLink(require(`../../Images/resource/${attLevel}.jpg`));
     setTreeImgLink(require(`../../Images/tree/${treeLevel}.jpg`));
 
-    console.log(attImgLink + "\n" + treeImgLink);
     setIsOnclick(isOnclick * -1);
 
     if (isOnclick === 1) {
+      //크리티컬함수
+      setCriticalRate(CriticalRate + 0.15 + 0.005 * CriticalRate);
+      setMoney(money - CriticalMoney);
+      setCriticalMoney(CriticalMoney + 0.05 * CriticalMoney);
+      console.log("크리티컬 : ", CriticalMoney, CriticalRate, "\n");
+
+      //장풍함수
+      setAttLevel(attLevel);
+      setMoney(money - attMoney);
+      setAttMoney(attMoney + 0.045 * attMoney);
+      console.log("공격 : ", attMoney, attLevel, "\n");
+
+      //나무함수
+      setTreeLevel(treeLevel);
+      setMoney(money - treeMoney);
+      setTreeMoney(treeMoney + 10000 + 0.25 * treeMoney);
+      console.log("나무 : ", treeMoney, treeLevel, "\n");
+
       setPlayerState(Charge2);
       setAttObject(
         AttObject.concat(
@@ -97,8 +123,35 @@ function MainPage() {
     if (toggleStore === 1) {
       setDisplayStore(
         <M.storeContainer>
+          <b>장풍 강화</b>
+          <p style={{ fontSize: "20px" }}>
+            나뭇잎을 사용하여 장풍을 강화할 수 있습니다.
+          </p>
           <M.storeDiv>
-            <M.upgradeButton></M.upgradeButton>
+            <M.upgradeDiv>
+              장풍 레벨업
+              <p style={{ fontSize: "10px" }}>
+                새로운 장풍을 획득 할 수 있습니다.
+              </p>
+              <img src={jpUpgrade}></img>
+              <M.upgradeButton>클릭!</M.upgradeButton>
+            </M.upgradeDiv>
+            <M.upgradeDiv>
+              크리티컬 확률
+              <p style={{ fontSize: "10px" }}>
+                크리티컬 확률을 증가시킬수 있습니다.
+              </p>
+              <img src={critUpgrade}></img>
+              <M.upgradeButton onClick={setCrit}>클릭!</M.upgradeButton>
+            </M.upgradeDiv>
+            <M.upgradeDiv>
+              나무에 물 주기
+              <p style={{ fontSize: "10px" }}>
+                나무를 성장시켜 나뭇잎 획득개수를 증가시킬수 있습니다.
+              </p>
+              <img src={treeUpgrade}></img>
+              <M.upgradeButton>클릭!</M.upgradeButton>
+            </M.upgradeDiv>
           </M.storeDiv>
         </M.storeContainer>
       );
@@ -110,7 +163,8 @@ function MainPage() {
   return (
     <M.container>
       <M.main>
-        <M.storeButton onClick={showStore}>{displayStore}</M.storeButton>
+        <M.storeButton onClick={showStore}></M.storeButton>
+        {displayStore}
         <M.moneyDiv>
           <M.moneyImg img={Money}></M.moneyImg>: {money}
         </M.moneyDiv>
