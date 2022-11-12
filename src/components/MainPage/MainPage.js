@@ -117,6 +117,10 @@ function MainPage() {
     }
   };
 
+  function closeStore() {
+    setToggleStore(toggleStore * -1);
+  }
+
   function showStore() {
     setToggleStore(toggleStore * -1);
 
@@ -134,7 +138,7 @@ function MainPage() {
                 새로운 장풍을 획득 할 수 있습니다.
               </p>
               <img src={jpUpgrade}></img>
-              <M.upgradeButton>클릭!</M.upgradeButton>
+              <M.upgradeButton>{parseInt(attMoney)}</M.upgradeButton>
             </M.upgradeDiv>
             <M.upgradeDiv>
               크리티컬 확률
@@ -142,7 +146,9 @@ function MainPage() {
                 크리티컬 확률을 증가시킬수 있습니다.
               </p>
               <img src={critUpgrade}></img>
-              <M.upgradeButton onClick={setCrit}>클릭!</M.upgradeButton>
+              <M.upgradeButton onClick={setCrit}>
+                {parseInt(CriticalMoney)}
+              </M.upgradeButton>
             </M.upgradeDiv>
             <M.upgradeDiv>
               나무에 물 주기
@@ -150,11 +156,14 @@ function MainPage() {
                 나무를 성장시켜 나뭇잎 획득개수를 증가시킬수 있습니다.
               </p>
               <img src={treeUpgrade}></img>
-              <M.upgradeButton>클릭!</M.upgradeButton>
+              <M.upgradeButton>{parseInt(treeMoney)}</M.upgradeButton>
             </M.upgradeDiv>
+            <M.backButton onClick={closeStore}>뒤로가기</M.backButton>
           </M.storeDiv>
         </M.storeContainer>
       );
+    } else {
+      setDisplayStore("");
     }
   }
 

@@ -157,10 +157,13 @@ export const upgradeDiv = styled.div`
   background-color: white;
   text-align: center;
   padding: 0.8rem;
+  justify-content: center;
+  align-content: center;
 `;
 
 export const upgradeButton = styled.button`
-  width: 60%;
+  display: flex;
+  width: 80%;
   height: 15%;
   border: 3px solid black;
   border-radius: 1rem;
@@ -169,6 +172,9 @@ export const upgradeButton = styled.button`
   margin-left: 2.25rem;
   margin-bottom: 0;
   background-color: white;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
   :hover {
     cursor: pointer;
@@ -183,9 +189,27 @@ export const upgradeButton = styled.button`
 `;
 
 export const backButton = styled.div`
-  width: 30%;
+  display: flex;
+  width: 20%;
   height: 20%;
+  position: absolute;
+  top: 5%;
+  left: 3%;
 
   border: 5px solid black;
   border-radius: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+
+  :hover {
+    cursor: pointer;
+  }
+
+  :active {
+    transition-duration: 0.15s;
+    background-image: none;
+    border-color: white;
+    background-color: black;
+  }
 `;
