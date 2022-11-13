@@ -92,15 +92,15 @@ export const moneyDiv = styled.div`
   flex-direction: row;
   text-align: center;
   align-items: center;
-  width: 30%;
+  width: 60%;
   height: 20%;
   margin: 2rem 0rem 0rem 2rem;
-  font-size: 60px;
+  font-size: 40px;
   font-weight: 600;
 `;
 
 export const moneyImg = styled.div`
-  width: 40%;
+  width: 20%;
   height: 110%;
 
   background: url(${(props) => props.img});
@@ -212,4 +212,26 @@ export const backButton = styled.div`
     border-color: white;
     background-color: black;
   }
+`;
+
+export const storeMoneyDiv = styled.div`
+  position: absolute;
+  display: flex;
+  left: 70%;
+  top: 0%;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  width: 60%;
+  height: 30%;
+  font-size: 40px;
+  font-weight: 600;
+`;
+
+export const storeMoneyImg = styled.div`
+  width: 15%;
+  height: 55%;
+
+  background: url(${(props) => props.img});
+  background-size: cover;
 `;

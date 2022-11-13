@@ -13,48 +13,62 @@ function MainPage() {
   let [AttObject, setAttObject] = useState([]);
   let [money, setMoney] = useState(0);
   let [attLevel, setAttLevel] = useState(1);
+  let [JpLevel, setJpLevel] = useState(1);
   let [CriticalRate, setCriticalRate] = useState(3);
   let [treeLevel, setTreeLevel] = useState(1);
-  let [attMoney, setAttMoney] = useState(500);
+  let [attMoney, setAttMoney] = useState(150);
   let [CriticalMoney, setCriticalMoney] = useState(1000);
   let [treeMoney, setTreeMoney] = useState(10000);
   let [displayStore, setDisplayStore] = useState();
-  let [toggleStore, setToggleStore] = useState(-1);
   let attlocation = useRef();
-  let tRandom = -500;
 
   let [attImgLink, setAttImgLink] = useState("");
   let [treeImgLink, setTreeImgLink] = useState("");
 
-  const setCrit = () => {};
+  function setCrit() {
+    if (money >= CriticalMoney) {
+      setMoney(money - CriticalMoney);
+      setCriticalRate(CriticalRate + 0.0025 + 0.01 * CriticalRate);
+      setCriticalMoney(CriticalMoney + 0.05 * CriticalMoney);
+      console.log("크리티컬 : ", CriticalMoney, CriticalRate, "\n");
+    }
+    if (CriticalRate >= 50) {
+      setCriticalRate(50);
+      setCriticalMoney();
+    }
+  }
+
+  function setJp() {
+    if (money >= attMoney) {
+      setAttLevel(attLevel + 1);
+      setMoney(money - attMoney);
+      setAttMoney(attMoney + 0.125 * attMoney);
+      console.log("공격 : ", attMoney, attLevel, JpLevel, "\n");
+    }
+
+    if (attLevel % 1000 === 0) {
+      setJpLevel(JpLevel + 1);
+    }
+  }
+
+  function setTree() {
+    if (money >= treeMoney) {
+      setTreeLevel(treeLevel);
+      setMoney(money - treeMoney);
+      setTreeMoney(treeMoney + 10000 + 0.25 * treeMoney);
+      console.log("나무 : ", treeMoney, treeLevel, "\n");
+    }
+  }
 
   const getRandom = (min, max) => Math.random() * (max - min) + min;
 
   const click = () => {
-    setAttImgLink(require(`../../Images/resource/${attLevel}.jpg`));
+    setAttImgLink(require(`../../Images/resource/${JpLevel}.jpg`));
     setTreeImgLink(require(`../../Images/tree/${treeLevel}.jpg`));
 
     setIsOnclick(isOnclick * -1);
 
     if (isOnclick === 1) {
-      //크리티컬함수
-      setCriticalRate(CriticalRate + 0.15 + 0.005 * CriticalRate);
-      setMoney(money - CriticalMoney);
-      setCriticalMoney(CriticalMoney + 0.05 * CriticalMoney);
-      console.log("크리티컬 : ", CriticalMoney, CriticalRate, "\n");
-
-      //장풍함수
-      setAttLevel(attLevel);
-      setMoney(money - attMoney);
-      setAttMoney(attMoney + 0.045 * attMoney);
-      console.log("공격 : ", attMoney, attLevel, "\n");
-
-      //나무함수
-      setTreeLevel(treeLevel);
-      setMoney(money - treeMoney);
-      setTreeMoney(treeMoney + 10000 + 0.25 * treeMoney);
-      console.log("나무 : ", treeMoney, treeLevel, "\n");
-
       setPlayerState(Charge2);
       setAttObject(
         AttObject.concat(
@@ -64,7 +78,7 @@ function MainPage() {
 
       for (let i = 0; i <= 90; i++) {
         setTimeout(() => {
-          tRandom = tRandom + getRandom(-150, 150);
+          let tRandom = -500 + getRandom(-150, 150);
           attlocation.current.style.left = `${20 + i * 1.2}%`;
           attlocation.current.style.top = `${tRandom}%`;
           attlocation.current.style.transform = `rotate(${getRandom(
@@ -81,7 +95,12 @@ function MainPage() {
 
       setMoney(
         parseInt(
-          (money += getRandom(2 * attLevel, (3 + attLevel / 2) * attLevel))
+          (money +=
+            getRandom(
+              2 * attLevel * (1 + JpLevel / 4),
+              (4000000 + attLevel / 2) * attLevel
+            ) *
+            (1 + JpLevel / 4))
         )
       );
     } else {
@@ -94,7 +113,7 @@ function MainPage() {
 
       for (let i = 0; i <= 90; i++) {
         setTimeout(() => {
-          tRandom = tRandom + getRandom(-150, 150);
+          let tRandom = -500 + getRandom(-150, 150);
           attlocation.current.style.left = `${20 + i * 1.2}%`;
           attlocation.current.style.top = `${tRandom}%`;
           attlocation.current.style.transform = `rotate(${getRandom(
@@ -107,65 +126,72 @@ function MainPage() {
           }
         }, 0.5 * i);
       }
-      attlocation.current.style.display = "none";
 
       setMoney(
         parseInt(
-          (money += getRandom(2 * attLevel, (3 + attLevel / 2) * attLevel))
+          (money +=
+            getRandom(
+              2 * attLevel * (1 + JpLevel / 4),
+              (4000000 + attLevel / 2) * attLevel
+            ) *
+            (1 + JpLevel / 4))
         )
       );
     }
   };
 
   function closeStore() {
-    setToggleStore(toggleStore * -1);
+    setDisplayStore("");
   }
 
-  function showStore() {
-    setToggleStore(toggleStore * -1);
+  const showStore = () => {
+    setDisplayStore(
+      <M.storeContainer>
+        <M.storeMoneyDiv>
+          <M.storeMoneyImg img={Money}></M.storeMoneyImg>: {parseInt(money)}
+        </M.storeMoneyDiv>
 
-    if (toggleStore === 1) {
-      setDisplayStore(
-        <M.storeContainer>
-          <b>장풍 강화</b>
-          <p style={{ fontSize: "20px" }}>
-            나뭇잎을 사용하여 장풍을 강화할 수 있습니다.
-          </p>
-          <M.storeDiv>
-            <M.upgradeDiv>
-              장풍 레벨업
-              <p style={{ fontSize: "10px" }}>
-                새로운 장풍을 획득 할 수 있습니다.
-              </p>
-              <img src={jpUpgrade}></img>
-              <M.upgradeButton>{parseInt(attMoney)}</M.upgradeButton>
-            </M.upgradeDiv>
-            <M.upgradeDiv>
-              크리티컬 확률
-              <p style={{ fontSize: "10px" }}>
-                크리티컬 확률을 증가시킬수 있습니다.
-              </p>
-              <img src={critUpgrade}></img>
-              <M.upgradeButton onClick={setCrit}>
-                {parseInt(CriticalMoney)}
-              </M.upgradeButton>
-            </M.upgradeDiv>
-            <M.upgradeDiv>
-              나무에 물 주기
-              <p style={{ fontSize: "10px" }}>
-                나무를 성장시켜 나뭇잎 획득개수를 증가시킬수 있습니다.
-              </p>
-              <img src={treeUpgrade}></img>
-              <M.upgradeButton>{parseInt(treeMoney)}</M.upgradeButton>
-            </M.upgradeDiv>
-            <M.backButton onClick={closeStore}>뒤로가기</M.backButton>
-          </M.storeDiv>
-        </M.storeContainer>
-      );
-    } else {
-      setDisplayStore("");
-    }
-  }
+        <b>장풍 강화</b>
+        <p style={{ fontSize: "20px" }}>
+          나뭇잎을 사용하여 장풍을 강화할 수 있습니다.
+        </p>
+
+        <M.storeDiv>
+          <M.upgradeDiv>
+            장풍 레벨업
+            <p style={{ fontSize: "10px" }}>
+              새로운 장풍을 획득 할 수 있습니다.
+            </p>
+            <img src={jpUpgrade}></img>
+            <M.upgradeButton onClick={setJp()}>
+              {parseInt(attMoney)}
+            </M.upgradeButton>
+          </M.upgradeDiv>
+          <M.upgradeDiv>
+            크리티컬 확률
+            <p style={{ fontSize: "10px" }}>
+              크리티컬 확률을 증가시킬수 있습니다.
+            </p>
+            <img src={critUpgrade}></img>
+            <M.upgradeButton onClick={setCrit()}>
+              {parseInt(CriticalMoney)}
+            </M.upgradeButton>
+          </M.upgradeDiv>
+          <M.upgradeDiv>
+            나무에 물 주기
+            <p style={{ fontSize: "10px" }}>
+              나무를 성장시켜 나뭇잎 획득개수를 증가시킬수 있습니다.
+            </p>
+            <img src={treeUpgrade}></img>
+            <M.upgradeButton onClick={setTree()}>
+              {parseInt(treeMoney)}
+            </M.upgradeButton>
+          </M.upgradeDiv>
+          <M.backButton onClick={closeStore}>뒤로가기</M.backButton>
+        </M.storeDiv>
+      </M.storeContainer>
+    );
+  };
 
   document.onclick = click;
 
@@ -175,7 +201,7 @@ function MainPage() {
         <M.storeButton onClick={showStore}></M.storeButton>
         {displayStore}
         <M.moneyDiv>
-          <M.moneyImg img={Money}></M.moneyImg>: {money}
+          <M.moneyImg img={Money}></M.moneyImg>: {parseInt(money)}
         </M.moneyDiv>
         <M.player img={playerState}></M.player>
         <M.attLine>
