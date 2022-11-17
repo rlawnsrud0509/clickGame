@@ -73,11 +73,11 @@ export const attLine = styled.div`
 
 export const AttObject = styled.img`
   top: -500%;
-  left: 20%;
+  left: 15%;
   position: absolute;
   display: flex;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   opacity: 1;
   transition-duration: 0.05s;
   transform: rotate(${Math.random(0 - 360) + 360});

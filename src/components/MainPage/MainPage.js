@@ -13,6 +13,8 @@ function MainPage() {
   let [JpLevel, setJpLevel] = useState(1);
   let [treeLevel, setTreeLevel] = useState(1);
   let attlocation = useRef();
+  let tRandom = -500;
+  let rotateSum = 0;
 
   let [attImgLink, setAttImgLink] = useState("");
   let [treeImgLink, setTreeImgLink] = useState("");
@@ -25,6 +27,10 @@ function MainPage() {
     setTreeImgLink(require(`../../Images/tree/${treeLevel}.jpg`));
 
     setIsOnclick(isOnclick * -1);
+    setAttLevel(attLevel + 1);
+    if (attLevel % 10 === 0) {
+      setJpLevel(JpLevel + 1);
+    }
 
     //사람 이미지 변경코드
     if (isOnclick === 1) {
@@ -38,19 +44,20 @@ function MainPage() {
       //장풍투사체 날아가는 코드
       for (let i = 0; i <= 90; i++) {
         setTimeout(() => {
-          let tRandom = -500 + getRandom(-150, 150);
-          attlocation.current.style.left = `${20 + i * 1.2}%`;
+          tRandom += tRandom = getRandom(-80, -120) + i * 2;
+          rotateSum += getRandom(4, 8);
+          attlocation.current.style.left = `${15 + i * 1.2}%`;
           attlocation.current.style.top = `${tRandom}%`;
-          attlocation.current.style.transform = `rotate(${getRandom(
-            -133,
-            99
-          )}deg)`;
+          attlocation.current.style.transform = `rotate(${rotateSum}deg)`;
 
-          if (i >= 90) {
+          if (i >= 80) {
             attlocation.current.style.opacity = `${1 - i * 0.11}`;
           }
-        }, 0.5 * i);
+        }, 7.5 * i);
       }
+      setTimeout(() => {
+        setPlayerState(Charge1);
+      }, 100);
       attlocation.current.style.display = "none";
 
       //클릭 시 돈올리기
@@ -66,7 +73,7 @@ function MainPage() {
       );
       //사람이미지 변경코드
     } else {
-      setPlayerState(Charge1);
+      setPlayerState(Charge2);
       setAttObject(
         AttObject.concat(
           <M.AttObject src={attImgLink} ref={attlocation}></M.AttObject>
@@ -76,19 +83,20 @@ function MainPage() {
       //장풍투사체 날아가는 코드
       for (let i = 0; i <= 90; i++) {
         setTimeout(() => {
-          let tRandom = -500 + getRandom(-150, 150);
-          attlocation.current.style.left = `${20 + i * 1.2}%`;
+          tRandom += tRandom = getRandom(-80, -120) + i * 2;
+          rotateSum += getRandom(4, 8);
+          attlocation.current.style.left = `${15 + i * 1.2}%`;
           attlocation.current.style.top = `${tRandom}%`;
-          attlocation.current.style.transform = `rotate(${getRandom(
-            -133,
-            99
-          )}deg)`;
+          attlocation.current.style.transform = `rotate(${rotateSum}deg)`;
 
-          if (i >= 90) {
+          if (i >= 80) {
             attlocation.current.style.opacity = `${1 - i * 0.11}`;
           }
-        }, 0.5 * i);
+        }, 7.5 * i);
       }
+      setTimeout(() => {
+        setPlayerState(Charge1);
+      }, 100);
 
       //돈올리기
       setMoney(
