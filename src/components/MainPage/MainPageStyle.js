@@ -116,6 +116,9 @@ export const tree = styled.img`
   height: 300px;
 
   background-size: cover;
+
+  transition-timing-function: ease-out;
+  transition-duration: 0.05s;
 `;
 
 export const storeContainer = styled.div`
