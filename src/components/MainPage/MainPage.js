@@ -2,6 +2,7 @@ import * as M from "./MainPageStyle";
 import Charge1 from "../../Images/baseImg/Charge1.jpg";
 import Charge2 from "../../Images/baseImg/Charge2.jpg";
 import Money from "../../Images/baseImg/Money.jpg";
+import StorePage from "../StorePage/StorePage";
 import { useState, useRef } from "react";
 
 function MainPage() {
@@ -15,31 +16,23 @@ function MainPage() {
   let attlocation = useRef([]);
   let treeRef = useRef();
   let [clicks, setClicks] = useState(0);
+  let [randCrit, setRandCrit] = useState(0);
+  let [CriticalRate, setCriticalRate] = useState(3);
   let tRandom = -500;
   let rotateSum = 0;
-
   let [attImgLink, setAttImgLink] = useState("");
   let [treeImgLink, setTreeImgLink] = useState("");
 
   const getRandom = (min, max) => Math.random() * (max - min) + min;
 
   const click = () => {
+    console.log(clicks);
+    setRandCrit(getRandom(0, 1000));
+
     setClicks(clicks + 1);
     //장풍, 나무 레벨올랐을때 이미지 새로고침
     setAttImgLink(require(`../../Images/resource/${JpLevel}.jpg`));
     setTreeImgLink(require(`../../Images/tree/${treeLevel}.jpg`));
-
-    //돈올리기
-    setMoney(
-      parseInt(
-        (money +=
-          getRandom(
-            2 * attLevel * (1 + JpLevel / 4),
-            (4 + attLevel / 2) * attLevel
-          ) *
-          (1 + JpLevel / 4))
-      )
-    );
 
     setIsOnclick(isOnclick * -1);
     //사람 이미지 변경코드
@@ -48,11 +41,50 @@ function MainPage() {
       setAttObject(
         AttObject.concat(
           <M.AttObject
+            id={clicks}
             src={attImgLink}
             ref={(el) => (attlocation.current[clicks] = el)}
           ></M.AttObject>
         )
       );
+
+      //돈올리기
+      setMoney(
+        parseInt(
+          (money +=
+            getRandom(
+              2 * attLevel * (1 + JpLevel / 4),
+              (4 + attLevel / 2) * attLevel
+            ) *
+            (1 + JpLevel / 4))
+        )
+      );
+
+      //나뭇잎 주는거
+
+      if (parseInt(CriticalRate * 10) >= randCrit) {
+        setMoney(
+          parseInt(
+            (money +=
+              getRandom(
+                4 * attLevel * 2 * (10 + (JpLevel * 2) / 4),
+                (8 + attLevel) * attLevel
+              ) *
+              (2 + JpLevel / 2)) //크리티컬시 추가 나뭇잎
+          )
+        );
+      } else {
+        setMoney(
+          parseInt(
+            (money +=
+              getRandom(
+                2 * attLevel * (1 + JpLevel / 4),
+                (4 + attLevel / 2) * attLevel
+              ) *
+              (1 + JpLevel / 4))
+          )
+        );
+      }
 
       //장풍투사체 날아가는 코드
       for (let i = 0; i <= 90; i++) {
@@ -64,6 +96,10 @@ function MainPage() {
           attlocation.current[
             clicks
           ].style.transform = `rotate(${rotateSum}deg)`;
+
+          if (parseInt(CriticalRate * 10) >= randCrit) {
+            attlocation.current[clicks].style.transform = "scale(3)";
+          }
 
           if (i >= 80) {
             attlocation.current[clicks].style.opacity = `${1 - i * 0.11}`;
@@ -78,7 +114,6 @@ function MainPage() {
       setTimeout(() => {
         setPlayerState(Charge1);
       }, 25);
-      attlocation.current.style.display = "none";
 
       //사람이미지 변경코드
     } else {
@@ -92,16 +127,46 @@ function MainPage() {
         )
       );
 
+      //나뭇잎 주는거
+
+      if (parseInt(CriticalRate * 10) >= randCrit) {
+        setMoney(
+          parseInt(
+            (money +=
+              getRandom(
+                4 * attLevel * 2 * (10 + (JpLevel * 2) / 4),
+                (8 + attLevel) * attLevel
+              ) *
+              (2 + JpLevel / 2)) //크리티컬시 추가 나뭇잎
+          )
+        );
+      } else {
+        setMoney(
+          parseInt(
+            (money +=
+              getRandom(
+                2 * attLevel * (1 + JpLevel / 4),
+                (4 + attLevel / 2) * attLevel
+              ) *
+              (1 + JpLevel / 4))
+          )
+        );
+      }
+
       //장풍투사체 날아가는 코드
       for (let i = 0; i <= 90; i++) {
         setTimeout(() => {
-          tRandom += tRandom = getRandom(-30, -130) + i * 2;
+          tRandom += tRandom = getRandom(-40, -130) + i * 2;
           rotateSum += getRandom(4, 8);
           attlocation.current[clicks].style.left = `${15 + i * 1.2}%`;
           attlocation.current[clicks].style.top = `${tRandom}%`;
           attlocation.current[
             clicks
           ].style.transform = `rotate(${rotateSum}deg)`;
+
+          if (parseInt(CriticalRate * 10) >= randCrit) {
+            attlocation.current[clicks].style.transform = "scale(3)";
+          }
 
           if (i >= 80) {
             attlocation.current[clicks].style.opacity = `${1 - i * 0.11}`;
@@ -110,7 +175,7 @@ function MainPage() {
         treeRef.current.style.transform = "scale(1.1)";
         setTimeout(() => {
           treeRef.current.style.transform = "scale(1)";
-        }, 10);
+        }, 30);
       }
       setTimeout(() => {
         setPlayerState(Charge1);

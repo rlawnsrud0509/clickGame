@@ -2,6 +2,7 @@ import * as M from "../MainPage/MainPageStyle";
 import jpUpgrade from "../../Images/baseImg/jpUpgrade.jpg";
 import treeUpgrade from "../../Images/baseImg/treeUpgrade.jpg";
 import critUpgrade from "../../Images/baseImg/criticalPlus.jpg";
+import Money from "../../Images/baseImg/Money.jpg";
 import { useState } from "react";
 
 function StorePage() {
@@ -107,7 +108,7 @@ function StorePage() {
             {parseInt(treeMoney)}
           </M.upgradeButton>
         </M.upgradeDiv>
-        <M.backButton onClick={closeStore}>뒤로가기</M.backButton>
+        <M.backButton>뒤로가기</M.backButton>
       </M.storeDiv>
     </M.storeContainer>
   );

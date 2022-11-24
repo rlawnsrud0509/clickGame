@@ -19,8 +19,10 @@ export const main = styled.div`
   background-size: cover;
   border: 5px solid black;
   border-radius: 0.5rem;
-  background-color: white;
   z-index: 0;
+  background-color: white;
+  background-image: url("../../Images/baseImg/background.jpg");
+  background-size: cover;
 `;
 
 export const storeButton = styled.button`
