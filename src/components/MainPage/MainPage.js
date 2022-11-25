@@ -26,6 +26,11 @@ function MainPage() {
   const getRandom = (min, max) => Math.random() * (max - min) + min;
 
   const click = () => {
+    // if (AttObject.length >= 30) {
+    //   setAttObject(AttObject.splice());
+    // }
+
+    console.log(AttObject);
     console.log(clicks);
     setRandCrit(getRandom(0, 1000));
 
@@ -98,7 +103,8 @@ function MainPage() {
           ].style.transform = `rotate(${rotateSum}deg)`;
 
           if (parseInt(CriticalRate * 10) >= randCrit) {
-            attlocation.current[clicks].style.transform = "scale(3)";
+            attlocation.current[clicks].style.transform = "scale(2)";
+            attlocation.current[clicks].style.filter = `hue-rotate(${i * 4})`;
           }
 
           if (i >= 80) {
@@ -165,7 +171,8 @@ function MainPage() {
           ].style.transform = `rotate(${rotateSum}deg)`;
 
           if (parseInt(CriticalRate * 10) >= randCrit) {
-            attlocation.current[clicks].style.transform = "scale(3)";
+            attlocation.current[clicks].style.transform = "scale(2)";
+            attlocation.current[clicks].style.filter = `hue-rotate(${i * 4})`;
           }
 
           if (i >= 80) {
