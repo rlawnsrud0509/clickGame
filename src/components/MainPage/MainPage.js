@@ -17,7 +17,7 @@ function MainPage() {
   let treeRef = useRef();
   let [clicks, setClicks] = useState(0);
   let [randCrit, setRandCrit] = useState(0);
-  let [CriticalRate, setCriticalRate] = useState(2);
+  let [CriticalRate, setCriticalRate] = useState(33);
   let tRandom = -500;
   let rotateSum = 0;
   let [attImgLink, setAttImgLink] = useState("");
