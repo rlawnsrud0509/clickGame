@@ -9,6 +9,10 @@ export const container = styled.div`
   align-items: center;
   background-color: black;
   z-index: -4;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const main = styled.div`
@@ -126,12 +130,10 @@ export const tree = styled.img`
 export const storeContainer = styled.div`
   display: flex;
   position: absolute;
-  top: -0.5%;
-  left: 0%;
   z-index: 5;
   flex-wrap: wrap;
-  width: 100%;
-  height: 101%;
+  width: 1000px;
+  height: 600px;
   opacity: 1;
   flex-direction: column;
   font-size: 40px;
