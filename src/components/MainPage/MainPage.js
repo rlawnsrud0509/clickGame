@@ -24,7 +24,7 @@ function MainPage() {
   let treeRef = useRef();
   let [clicks, setClicks] = useState(0);
   let [randCrit, setRandCrit] = useState(0);
-  let [CriticalRate, setCriticalRate] = useState(3);
+  let [CriticalRate, setCriticalRate] = useState(1);
   let tRandom = -500;
   let rotateSum = 0;
   let [attImgLink, setAttImgLink] = useState("");
@@ -117,27 +117,25 @@ function MainPage() {
 
       if (parseInt(CriticalRate * 10) >= randCrit) {
         setMoney(
-          (1 + treeLevel / 5) *
-            parseInt(
-              (money +=
-                getRandom(
-                  4 * attLevel * 2 * (10 + JpLevel / 2),
-                  (8 + attLevel) * attLevel
-                ) *
-                (2 + JpLevel / 2)) //크리티컬시 추가 나뭇잎
-            )
+          parseInt(
+            (money +=
+              getRandom(
+                (4 + attLevel / 2) * (1 + JpLevel / 4),
+                (4 + attLevel / 2) * (1 + JpLevel / 4) * 2
+              ) *
+              (1 + treeLevel / 5) *
+              10)
+          )
         );
       } else {
         setMoney(
-          (1 + treeLevel / 5) *
-            parseInt(
-              (money +=
-                getRandom(
-                  2 * attLevel * (1 + JpLevel / 4),
-                  (4 + attLevel / 2) * attLevel
-                ) *
-                (1 + JpLevel / 4))
-            )
+          parseInt(
+            (money += getRandom(
+              (4 + attLevel / 2) * (1 + JpLevel / 4),
+              (4 + attLevel / 2) * (1 + JpLevel / 4) * 2
+            )) *
+              (1 + treeLevel / 5)
+          )
         );
       }
 
@@ -188,26 +186,24 @@ function MainPage() {
       if (parseInt(CriticalRate * 10) >= randCrit) {
         setMoney(
           parseInt(
-            (1 + treeLevel / 5) *
-              (money +=
-                getRandom(
-                  4 * attLevel * 2 * (10 + JpLevel / 2),
-                  (8 + attLevel) * attLevel
-                ) *
-                (2 + JpLevel / 2)) //크리티컬시 추가 나뭇잎
+            (money +=
+              getRandom(
+                (4 + attLevel / 2) * (1 + JpLevel / 4),
+                (4 + attLevel / 2) * (1 + JpLevel / 4) * 2
+              ) *
+              (1 + treeLevel / 5) *
+              10)
           )
         );
       } else {
         setMoney(
-          (1 + treeLevel / 5) *
-            parseInt(
-              (money +=
-                getRandom(
-                  2 * attLevel * (1 + JpLevel / 4),
-                  (4 + attLevel / 2) * attLevel
-                ) *
-                (1 + JpLevel / 4))
-            )
+          parseInt(
+            (money += getRandom(
+              (4 + attLevel / 2) * (1 + JpLevel / 4),
+              (4 + attLevel / 2) * (1 + JpLevel / 4) * 2
+            )) *
+              (1 + treeLevel / 5)
+          )
         );
       }
 
