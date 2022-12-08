@@ -18,7 +18,7 @@ function MainPage() {
   let [JpLevel, setJpLevel] = useState(1);
   let [treeLevel, setTreeLevel] = useState(0);
   let [attMoney, setAttMoney] = useState(150);
-  let [CriticalMoney, setCriticalMoney] = useState(1000);
+  let [CriticalMoney, setCriticalMoney] = useState(1001);
   let [treeMoney, setTreeMoney] = useState(10000);
   let attlocation = useRef([]);
   let treeRef = useRef();
